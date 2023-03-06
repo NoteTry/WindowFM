@@ -26,6 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\WindowFM.Shared.ViewModels\WindowFM.Shared.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Core\WindowFM.Shared.ViewModels\WindowFM.Shared.ViewModels.csproj" />
   </ItemGroup>
 </Project>
