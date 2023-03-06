@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowFM.WPF.UI", "WPF\Wind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowFM.Avalonia.UI", "AvaloniaUI\WindowFM.Avalonia.UI\WindowFM.Avalonia.UI.csproj", "{431E19C1-8863-4F0E-B3BB-6B265A8ABAA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowFM.Shared.ViewModels", "Core\WindowFM.Shared.ViewModels\WindowFM.Shared.ViewModels.csproj", "{A4CAB318-CCD1-41B5-9005-62D7C0EFCFFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowFM.Shared.ViewModels", "Core\WindowFM.Shared.ViewModels\WindowFM.Shared.ViewModels.csproj", "{A4CAB318-CCD1-41B5-9005-62D7C0EFCFFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

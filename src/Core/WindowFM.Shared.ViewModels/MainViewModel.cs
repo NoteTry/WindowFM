@@ -1,62 +1,61 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace WindowFM.Shared.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
         #region Public Methods
-        public string FilePath { get; set; }
+        public ObservableCollection<DirectoryTabItemViewModel> DirectoryTabItems { get; set; } =
+            new ObservableCollection<DirectoryTabItemViewModel>();
 
-        public ObservableCollection<FileEntityViewModel> DirectoriesAndFiles { get; set; } 
-            = new ObservableCollection<FileEntityViewModel>();
+        public DirectoryTabItemViewModel CurrntDirectoryTabItem { get; set; }
 
-        public FileEntityViewModel SelectedFileEntity { get; set; }
         #endregion
-
+        public DelegateCommand AddTabItemCommand { get; }
         #region Commands
-
-        public ICommand OpenCommand { get; }
 
         #endregion
 
         #region Constructor
         public MainViewModel()
         {
-            OpenCommand = new DelegateCommand(Open);
+            AddTabItemCommand = new DelegateCommand(OnAdd);
 
-            foreach (var logicDrives in Directory.GetLogicalDrives()) 
-                DirectoriesAndFiles.Add(new DirectoryViewModel(logicDrives));
+            AddTabItemViewModel();
+
+            CurrntDirectoryTabItem = DirectoryTabItems.FirstOrDefault();   
         }
         #endregion
 
-        #region Commands Meethod
+        #region Private Methods
 
-        private void Open(object parameter)
+        private void OnAdd(object obj)
         {
-            if (parameter is DirectoryViewModel directoryViewModel)
+            AddTabItemViewModel();
+        }
+
+        private void AddTabItemViewModel()
+        {
+            var vm = new DirectoryTabItemViewModel();
+            vm.Closed += Vm_Clossed;
+            DirectoryTabItems.Add(vm);
+            CurrntDirectoryTabItem = vm;
+        }
+
+        private void Vm_Clossed(object? sender, EventArgs e)
+        {
+            if (sender is DirectoryTabItemViewModel directoryTabItemViewModel)
             {
-                FilePath = directoryViewModel.FullName;
-
-                DirectoriesAndFiles.Clear();
-
-                var directoryInfo = new DirectoryInfo(FilePath);
-
-                foreach (var directory in directoryInfo.GetDirectories())
-                {
-                    DirectoriesAndFiles.Add(new DirectoryViewModel(directory));
-                }
-
-                foreach (var fileInfo in directoryInfo.GetFiles())
-                {
-                    DirectoriesAndFiles.Add(new FileViewModel(fileInfo));
-                }
+                CloseTab(directoryTabItemViewModel);
             }
         }
 
+        private void CloseTab(DirectoryTabItemViewModel directoryTabItemViewModel)
+        {
+            directoryTabItemViewModel.Closed -= Vm_Clossed;
+            DirectoryTabItems.Remove(directoryTabItemViewModel);
+            CurrntDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
+        }
         #endregion
     }
 }
