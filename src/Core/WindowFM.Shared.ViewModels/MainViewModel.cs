@@ -27,6 +27,13 @@ namespace WindowFM.Shared.ViewModels
         }
         #endregion
 
+        #region Public Methods
+        public void AppClosing()
+        {
+            
+        }
+        #endregion
+
         #region Private Methods
 
         private void OnAdd(object obj)
