@@ -12,12 +12,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding FilePath}"></TextBlock>
-
-        <ListBox 
-                        Grid.Row="1"
-                        ItemsSource="{Binding DirectoriesAndFiles}"
-                        SelectedItem="{Binding SelectedFileEntity}">
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding DirectoriesAndFiles}"
+                 SelectedItem="{Binding SelectedFileEntity}">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
                     <b:InvokeCommandAction 

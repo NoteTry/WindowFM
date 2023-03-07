@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Windows.Input;
 
 namespace WindowFM.Shared.ViewModels
 {
@@ -11,8 +13,12 @@ namespace WindowFM.Shared.ViewModels
         public DirectoryTabItemViewModel CurrntDirectoryTabItem { get; set; }
 
         #endregion
-        public DelegateCommand AddTabItemCommand { get; }
+
         #region Commands
+
+        public DelegateCommand AddTabItemCommand { get; }
+
+        public DelegateCommand CloseCommand { get; }
 
         #endregion
 
@@ -20,6 +26,7 @@ namespace WindowFM.Shared.ViewModels
         public MainViewModel()
         {
             AddTabItemCommand = new DelegateCommand(OnAdd);
+            CloseCommand = new DelegateCommand(OnClose);
 
             AddTabItemViewModel();
 
@@ -36,6 +43,14 @@ namespace WindowFM.Shared.ViewModels
 
         #region Private Methods
 
+        private void OnClose(object ob)
+        {
+            if (ob is DirectoryTabItemViewModel directoryTabItemViewModel)
+            {
+                CloseTab(directoryTabItemViewModel);
+            }
+        }
+
         private void OnAdd(object obj)
         {
             AddTabItemViewModel();
@@ -44,22 +59,14 @@ namespace WindowFM.Shared.ViewModels
         private void AddTabItemViewModel()
         {
             var vm = new DirectoryTabItemViewModel();
-            vm.Closed += Vm_Clossed;
+            
             DirectoryTabItems.Add(vm);
             CurrntDirectoryTabItem = vm;
         }
 
-        private void Vm_Clossed(object? sender, EventArgs e)
-        {
-            if (sender is DirectoryTabItemViewModel directoryTabItemViewModel)
-            {
-                CloseTab(directoryTabItemViewModel);
-            }
-        }
-
         private void CloseTab(DirectoryTabItemViewModel directoryTabItemViewModel)
         {
-            directoryTabItemViewModel.Closed -= Vm_Clossed;
+            
             DirectoryTabItems.Remove(directoryTabItemViewModel);
             CurrntDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
         }

@@ -9,7 +9,8 @@
         xmlns:ui="clr-namespace:WindowFM.WPF.UI"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="None"
+        x:Name="Window">
     
     <Window.Resources>
         <Style TargetType="{x:Type Window}"
@@ -22,6 +23,8 @@
                                 <!--  -->
                                 <Grid.RowDefinitions>
                                     <!-- Title bar -->
+                                    <RowDefinition Height="40" />
+                                    <!-- Line TextBox -->
                                     <RowDefinition Height="40" />
                                     <!-- BookMarks -->
                                     <RowDefinition Height="36" />
@@ -49,7 +52,9 @@
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Name}"></TextBlock>
-                                                    <Button Command="{Binding CloseCommand}">X</Button>
+                                                    <Button Content="X"
+                                                            Command="{Binding DataContext.CloseCommand, ElementName=Window}"
+                                                            CommandParameter="{Binding}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
@@ -80,14 +85,41 @@
                                     </StackPanel>
                                 </Grid>
 
-                                <StackPanel Grid.Row="1" 
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Button Content="&lt;"
+                                            Margin="2"
+                                            Command="{Binding CurrntDirectoryTabItem.MoveBackCommand}"
+                                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                                    <Button Grid.Column="1" 
+                                            Content="&gt;"
+                                            Margin="2"
+                                            Command="{Binding CurrntDirectoryTabItem.MoveForwardCommand}"
+                                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                                    <Button Grid.Column="2" 
+                                            Content="0"
+                                            Margin="2"
+                                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                                    <TextBox Grid.Column="3" 
+                                             Text="{Binding CurrntDirectoryTabItem.FilePath}"
+                                             VerticalAlignment="Center"
+                                             FontSize="16"/>
+                                </Grid>
+
+                                <StackPanel Grid.Row="2" 
                                             Background="#FF353535">
-                                    <Menu>
+                                    <Menu Background="Transparent">
                                         <MenuItem Header="Я хочу питсы"/>
                                     </Menu>
                                 </StackPanel>
                                 
-                                <ContentControl Grid.Row="2"
+                                <ContentControl Grid.Row="3"
                                                 Content="{Binding CurrntDirectoryTabItem}">
                                     <ContentControl.ContentTemplate>
                                         <DataTemplate>
