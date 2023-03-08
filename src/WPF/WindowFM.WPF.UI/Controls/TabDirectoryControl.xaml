@@ -22,7 +22,7 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center">
-            
+
             <!-- Style -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
@@ -58,13 +58,13 @@
                                             BorderThickness="{TemplateBinding BorderThickness}" 
                                             Padding="{TemplateBinding Padding}" 
                                             SnapsToDevicePixels="true">
-                                    <ContentPresenter Grid.Row="1"
+                                        <ContentPresenter Grid.Row="1"
                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     </Border>
                                 </Grid>
-                                    
+
                                 <ControlTemplate.Triggers>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -129,7 +129,7 @@
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                            <Image Source="{Binding ., Converter={StaticResource ToImagConverter}}"></Image>
+                        <Image Source="{Binding ., Converter={StaticResource ToImagConverter}}"></Image>
                         <TextBlock Grid.Row="1" 
                                    Foreground="White"
                                    HorizontalAlignment="Center"
