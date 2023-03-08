@@ -9,10 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\WindowFM.Shared.ViewModels\WindowFM.Shared.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\anime-4k-computer-wallpaper-preview.jpg" />
   </ItemGroup>
 
 </Project>

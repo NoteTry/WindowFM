@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WindowFM.Shared.ViewModels
+﻿namespace WindowFM.Shared.ViewModels
 {
     internal interface IDirectoryHistory : IEnumerable<DirectoryNode>
     {
